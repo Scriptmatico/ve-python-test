@@ -1,3 +1,6 @@
+# Ho to run
+Use python 3 to run the application, no requirements are needed, in command line just run `python main.py`
+
 # Valid Eval Python Test
 
 The `main.py` file contains the challenge description along with test cases to verify the correctness of your solution. To run the tests, follow these steps:
