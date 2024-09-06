@@ -42,11 +42,43 @@ If a result in seconds has decimals (e.g., ab.xy...), it should be truncated to
 'ab'. If the given string is empty, your function should return an empty string
 as well.
 """
+def format_time(seconds):
+    hours = seconds // 3600
+    minutes = (seconds % 3600) // 60
+    seconds = seconds % 60
+    return  f"{hours:02d}|{minutes:02d}|{seconds:02d}"
 
-
-def stat(s):
+def stat(race_results):
     """ Your solution here """
-    return 'Range: {} Average: {} Median: {}'
+
+    if not race_results:
+        return ""
+
+    times = race_results.split(', ')
+    total_seconds = []
+
+    # Convert each race result time in to total seconds
+    for time in times:
+        h, m, s = map(int, time.split('|'))
+        total_seconds.append(h * 3600 + m * 60 + s)
+
+    range = max(total_seconds) - min(total_seconds)
+
+    average = sum(total_seconds) // len(total_seconds)
+
+    total_seconds.sort()
+    n = len(total_seconds)
+    
+    if n % 2 == 1:
+        median_seconds = total_seconds[n // 2]
+    else:
+        median_seconds = (total_seconds[n // 2 - 1] + total_seconds[n // 2]) //2
+
+    range_str = format_time(range)
+    average_str = format_time(average)
+    median_str = format_time(median_seconds)
+
+    return f'Range: {range_str} Average: {average_str} Median: {median_str}'
 
 
 # Test cases
